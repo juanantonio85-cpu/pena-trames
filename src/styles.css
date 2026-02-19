@@ -1,0 +1,215 @@
+body {
+  background: #0a0a0c;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+
+/* Pantalla de carga */
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.loading-bar::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: #00ff87;
+  animation: loading 2s infinite;
+}
+
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
+
+/* Glow FIFA */
+.logo-glow {
+  filter: drop-shadow(0 0 10px #00ff87)
+          drop-shadow(0 0 20px #00ff87)
+          drop-shadow(0 0 40px #00ff87);
+  animation: glowPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0 0 5px #00ff87); }
+  50% { filter: drop-shadow(0 0 25px #00ff87); }
+  100% { filter: drop-shadow(0 0 5px #00ff87); }
+}
+
+.fifa-button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, #00ff87, #00d46a);
+  color: black;
+  font-weight: 900;
+  border-radius: 15px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border: none;
+  transition: 0.2s;
+  text-transform: uppercase;
+}
+
+.fifa-button:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 10px #00ff87);
+}
+
+.fifa-input {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-weight: bold;
+  outline: none;
+}
+
+.fifa-input::placeholder {
+  color: rgba(255,255,255,0.4);
+}
+
+.fifa-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,255,135,0.1);
+}
+
+.fifa-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 25px;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+
+.fifa-panel-title {
+  margin: 0 0 15px 0;
+  font-size: 22px;
+  font-weight: 900;
+  color: #00ff87;
+  text-transform: uppercase;
+}
+
+.fifa-panel-content {
+  padding-top: 10px;
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 90%;
+  max-width: 380px;
+  background: rgba(255,255,255,0.05);
+  padding: 40px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.login-logo {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.layout-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.header-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.layout-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.layout-menu {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+  background: rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.layout-menu button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.layout-menu button:hover {
+  color: #00ff87;
+}
+
+.admin-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.admin-menu button {
+  flex: 1;
+  padding: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.admin-menu button:hover {
+  background: #00ff87;
+  color: black;
+}
