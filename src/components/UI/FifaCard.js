@@ -18,13 +18,13 @@ export default function FifaCard({ player }) {
         textTransform: "uppercase",
       }}
     >
-      {/* MEDIA (más baja y más pequeña) */}
+      {/* MEDIA (bajada un poco más) */}
       <div
         style={{
           position: "absolute",
-          top: 58,        // BAJADO
+          top: 66,        // antes 58 → bajada fina
           left: 26,
-          fontSize: 30,   // MÁS PEQUEÑO
+          fontSize: 30,
           fontFamily: "'Anton', sans-serif",
           fontWeight: 900,
           color: "#2f2f2f",
@@ -33,13 +33,13 @@ export default function FifaCard({ player }) {
         {player.mediaGeneral || 50}
       </div>
 
-      {/* POSICIÓN (más baja y más pequeña) */}
+      {/* POSICIÓN (bajada acorde a la media) */}
       <div
         style={{
           position: "absolute",
-          top: 92,        // BAJADO
+          top: 102,       // antes 92 → bajada fina
           left: 30,
-          fontSize: 14,   // MÁS PEQUEÑO
+          fontSize: 14,
           fontWeight: 700,
         }}
       >
