@@ -12,52 +12,39 @@ export default function FifaCard({ player }) {
         backgroundImage: "url('/fifa-card-gold.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        color: "#000",
-        fontFamily: "sans-serif",
-        margin: "0 auto"
+        color: "#3b3b3b",
+        fontFamily: "'Oswald', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+        margin: "0 auto",
+        textTransform: "uppercase",
       }}
     >
-      {/* Media */}
+      {/* Media total (arriba izquierda) */}
       <div
         style={{
           position: "absolute",
-          top: 45,
-          left: 28,
-          fontSize: 40,
-          fontWeight: "900",
+          top: 28,
+          left: 26,
+          fontSize: 34,
+          fontWeight: 900,
         }}
       >
         {player.mediaGeneral || 50}
       </div>
 
-      {/* Posición */}
+      {/* Posición (debajo de la media) */}
       <div
         style={{
           position: "absolute",
-          top: 92,
-          left: 32,
-          fontSize: 18,
-          fontWeight: "700",
+          top: 68,
+          left: 30,
+          fontSize: 16,
+          fontWeight: 700,
         }}
       >
-        {player.posicion || "N/A"}
+        {player.posicion || "ST"}
       </div>
 
-      {/* Escudo TRAMES FC */}
-      <img
-        src="/logo.png"
-        alt="TRAMES FC"
-        style={{
-          position: "absolute",
-          top: 50,
-          right: 28,
-          width: 40,
-          height: 40,
-          objectFit: "contain",
-        }}
-      />
-
-      {/* Foto jugador */}
+      {/* Foto jugador (centrada) */}
       <img
         src={player.fotoURL || "/default-player.png"}
         alt="foto"
@@ -66,44 +53,76 @@ export default function FifaCard({ player }) {
           height: 130,
           objectFit: "contain",
           position: "absolute",
-          top: 120,
+          top: 90,
           left: "50%",
           transform: "translateX(-50%)",
         }}
       />
 
-      {/* Nombre */}
+      {/* Nombre jugador (debajo de la foto) */}
+      <div
+        style={{
+          position: "absolute",
+          top: 230,
+          width: "100%",
+          textAlign: "center",
+          fontSize: 18,
+          fontWeight: 700,
+          letterSpacing: 1,
+        }}
+      >
+        {player.name}
+      </div>
+
+      {/* Nombres de las métricas (debajo del nombre) */}
       <div
         style={{
           position: "absolute",
           top: 260,
           width: "100%",
           textAlign: "center",
-          fontSize: 20,
-          fontWeight: "700",
+          fontSize: 11,
+          fontWeight: 700,
+          letterSpacing: 1,
         }}
       >
-        {player.name}
+        PAC&nbsp;&nbsp;&nbsp;SHO&nbsp;&nbsp;&nbsp;PAS&nbsp;&nbsp;&nbsp;DRI&nbsp;&nbsp;&nbsp;DEF&nbsp;&nbsp;&nbsp;PHY
       </div>
 
-      {/* Stats */}
+      {/* Valores de las métricas (debajo de los nombres) */}
       <div
         style={{
           position: "absolute",
-          bottom: 40,
-          left: 40,
-          fontSize: 15,
-          fontWeight: "700",
-          lineHeight: "22px",
+          top: 280,
+          width: "100%",
+          textAlign: "center",
+          fontSize: 13,
+          fontWeight: 700,
+          letterSpacing: 2,
         }}
       >
-        <div>PAC {player.pac || 50}</div>
-        <div>SHO {player.sho || 50}</div>
-        <div>PAS {player.pas || 50}</div>
-        <div>DRI {player.dri || 50}</div>
-        <div>DEF {player.def || 50}</div>
-        <div>PHY {player.phy || 50}</div>
+        {(player.pac || 50)}&nbsp;&nbsp;&nbsp;
+        {(player.sho || 50)}&nbsp;&nbsp;&nbsp;
+        {(player.pas || 50)}&nbsp;&nbsp;&nbsp;
+        {(player.dri || 50)}&nbsp;&nbsp;&nbsp;
+        {(player.def || 50)}&nbsp;&nbsp;&nbsp;
+        {(player.phy || 50)}
       </div>
+
+      {/* Escudo TRAMES FC (abajo centrado) */}
+      <img
+        src="/logo.png"
+        alt="TRAMES FC"
+        style={{
+          position: "absolute",
+          bottom: 18,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: 40,
+          height: 40,
+          objectFit: "contain",
+        }}
+      />
     </div>
   );
 }
