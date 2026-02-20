@@ -22,9 +22,9 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 48,       // antes 42 → bajada fina
+          top: 58,        // BAJADO
           left: 26,
-          fontSize: 34,  // antes 40 → más pequeña
+          fontSize: 30,   // MÁS PEQUEÑO
           fontFamily: "'Anton', sans-serif",
           fontWeight: 900,
           color: "#2f2f2f",
@@ -37,9 +37,9 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 88 + 10,  // antes 88 → bajada 10px
+          top: 92,        // BAJADO
           left: 30,
-          fontSize: 15,  // antes 18 → más pequeña
+          fontSize: 14,   // MÁS PEQUEÑO
           fontWeight: 700,
         }}
       >
@@ -55,7 +55,7 @@ export default function FifaCard({ player }) {
           height: 130,
           objectFit: "contain",
           position: "absolute",
-          top: 105,
+          top: 110,
           left: "50%",
           transform: "translateX(-50%)",
         }}
