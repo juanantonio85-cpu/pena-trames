@@ -1,57 +1,73 @@
 import React, { useEffect, useState } from "react";
+import "./MatchHistory.css";
 import { db } from "../../firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
-import FifaCard from "../UI/FifaCard";
-import FifaButton from "../UI/FifaButton";
-import { IconField } from "../UI/IconsFifa";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function MatchHistory({ onNavigate }) {
-  const [matches, setMatches] = useState([]);
+  const [partidos, setPartidos] = useState([]);
 
   useEffect(() => {
-    const load = async () => {
-      const q = query(collection(db, "matches"), where("status", "==", "closed"));
-      const snap = await getDocs(q);
+    const fetchPartidos = async () => {
+      const snap = await getDocs(collection(db, "partidos"));
+      const lista = [];
+      snap.forEach((d) => lista.push({ id: d.id, ...d.data() }));
 
-      const list = [];
-      snap.forEach((d) => list.push({ id: d.id, ...d.data() }));
+      lista.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
-      // Ordenar por fecha descendente
-      list.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-
-      setMatches(list);
+      setPartidos(lista);
     };
 
-    load();
+    fetchPartidos();
   }, []);
 
   return (
-    <div>
-      {/* Botón volver */}
-      <div style={{ marginBottom: 20 }}>
-        <FifaButton onClick={() => onNavigate("home")}>⬅ Volver</FifaButton>
-      </div>
+    <div className="history-container">
+      <button className="btn volver-btn" onClick={() => onNavigate("home")}>
+        ⬅ Volver
+      </button>
 
-      <h2 style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <IconField />
-        Historial de Partidos
-      </h2>
+      <header className="history-header">
+        <img src="/logo.png" alt="TRAMES FC" className="history-logo" />
+        <h1 className="history-title">HISTORIAL DE PARTIDOS</h1>
+        <p className="history-subtitle">RESULTADOS Y PARTIDOS PASADOS</p>
+      </header>
 
-      {matches.length === 0 && <p>No hay partidos cerrados todavía.</p>}
+      <div className="history-list">
+        {partidos.length === 0 && (
+          <p className="empty">No hay partidos registrados todavía.</p>
+        )}
 
-      <div style={{ marginTop: 20, display: "flex", flexDirection: "column", gap: 16 }}>
-        {matches.map((m) => (
-          <FifaCard key={m.id}>
-            <h3>Partido del {m.fecha}</h3>
+        {partidos.map((p) => (
+          <div key={p.id} className="history-card">
+            <h2>{p.fecha} — {p.hora}</h2>
+            <p><strong>Lugar:</strong> {p.lugar}</p>
+            <p><strong>Estado:</strong> {p.estado}</p>
 
-            <p>
-              Resultado: 🔴 {m.finalScore.red} - {m.finalScore.white} ⚪
-            </p>
+            {p.estado === "jugado" && (
+              <p><strong>Resultado:</strong> Rojo {p.golesRojo} - {p.golesBlanco} Blanco</p>
+            )}
 
-            <FifaButton onClick={() => onNavigate("matchDetails", m.id)}>
-              Ver resumen
-            </FifaButton>
-          </FifaCard>
+            <div className="teams-box">
+              <div>
+                <h3>Equipo ROJO</h3>
+                {p.equipoRojo?.length > 0 ? (
+                  p.equipoRojo.map((j, i) => <p key={i}>{j}</p>)
+                ) : (
+                  <p className="empty-team">Sin asignar</p>
+                )}
+              </div>
+
+              <div>
+                <h3>Equipo BLANCO</h3>
+                {p.equipoBlanco?.length > 0 ? (
+                  p.equipoBlanco.map((j, i) => <p key={i}>{j}</p>)
+                ) : (
+                  <p className="empty-team">Sin asignar</p>
+                )}
+              </div>
+            </div>
+
+          </div>
         ))}
       </div>
     </div>

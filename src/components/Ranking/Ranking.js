@@ -1,58 +1,66 @@
 import React, { useEffect, useState } from "react";
+import "./Ranking.css";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import FifaPlayerCard from "../UI/FifaPlayerCard";
-import FifaButton from "../UI/FifaButton";
-import { IconTrophy } from "../UI/IconsFifa";
 
 export default function Ranking({ onNavigate }) {
-  const [players, setPlayers] = useState([]);
+  const [jugadores, setJugadores] = useState([]);
 
   useEffect(() => {
-    const load = async () => {
+    const fetchRanking = async () => {
       const snap = await getDocs(collection(db, "users"));
-      const list = [];
-      snap.forEach((d) => list.push({ id: d.id, ...d.data() }));
+      const lista = [];
 
-      // Ordenar por goles
-      list.sort((a, b) => (b.goals || 0) - (a.goals || 0));
+      snap.forEach((d) => {
+        lista.push({
+          id: d.id,
+          ...d.data(),
+          puntos: d.data().puntos || 0
+        });
+      });
 
-      setPlayers(list);
+      // Ordenar por puntos descendente
+      lista.sort((a, b) => b.puntos - a.puntos);
+
+      setJugadores(lista);
     };
 
-    load();
+    fetchRanking();
   }, []);
 
   return (
-    <div>
-      {/* Botón volver */}
-      <div style={{ marginBottom: 20 }}>
-        <FifaButton onClick={() => onNavigate("home")}>⬅ Volver</FifaButton>
-      </div>
+    <div className="ranking-container">
+      <button className="btn volver-btn" onClick={() => onNavigate("home")}>
+        ⬅ Volver
+      </button>
 
-      {/* Título */}
-      <h2 style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <IconTrophy />
-        Ranking de Goleadores
-      </h2>
+      <header className="ranking-header">
+        <img src="/logo.png" alt="TRAMES FC" className="ranking-logo" />
+        <h1 className="ranking-title">RANKING GENERAL</h1>
+        <p className="ranking-subtitle">CLASIFICACIÓN DE JUGADORES</p>
+      </header>
 
-      {/* Lista de jugadores */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 20,
-          marginTop: 20,
-          justifyContent: "center"
-        }}
-      >
-        {players.map((p) => (
-          <div
-            key={p.id}
-            style={{ cursor: "pointer" }}
-            onClick={() => onNavigate("profile", p.id)} // ⭐ OPCIONAL
-          >
-            <FifaPlayerCard player={p} />
+      <div className="ranking-list">
+        {jugadores.length === 0 && (
+          <p className="empty">No hay jugadores registrados.</p>
+        )}
+
+        {jugadores.map((j, index) => (
+          <div key={j.id} className="ranking-card">
+            <div className="ranking-position">
+              #{index + 1}
+            </div>
+
+            <div className="ranking-info">
+              <h3>{j.name || j.email}</h3>
+              <p>Puntos: {j.puntos}</p>
+            </div>
+
+            <div className="ranking-badge">
+              {index === 0 && <span className="oro">🥇</span>}
+              {index === 1 && <span className="plata">🥈</span>}
+              {index === 2 && <span className="bronce">🥉</span>}
+            </div>
           </div>
         ))}
       </div>

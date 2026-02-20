@@ -1,0 +1,77 @@
+.attendance-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.attendance-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.attendance-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.attendance-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.attendance-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.attendance-card {
+  background: var(--dark);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.attendance-card h2 {
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+  margin-bottom: 20px;
+}
+
+.attendance-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.asistir-btn {
+  background: #00ff7f;
+  color: #000;
+}
+
+.noasistir-btn {
+  background: #ff4c4c;
+  color: #fff;
+}
+
+.active {
+  box-shadow: 0 0 20px var(--green-glow);
+  transform: scale(1.05);
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}

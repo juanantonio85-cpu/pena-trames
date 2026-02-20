@@ -1,45 +1,51 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
-import FifaInput from "./UI/FifaInput";
-import FifaButton from "./UI/FifaButton";
+import "./Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
-  const login = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      setError("Usuario o contraseña incorrectos");
+    } catch (error) {
+      console.error(error);
     }
   };
 
   return (
     <div className="login-container">
-      <div className="login-card">
-        <img src="/logo-glow.png" className="login-logo logo-glow" />
+      <div className="login-box">
 
-        <h2 style={{ marginBottom: 20 }}>Peña Trames</h2>
+        <img src="/logo.png" alt="TRAMES FC" className="login-logo" />
 
-        <FifaInput
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <h2 className="login-title">ACCESO TRAMES FC</h2>
+        <p className="login-subtitle">PRIVATE ACCESS ONLY</p>
 
-        <FifaInput
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <form onSubmit={handleLogin} className="login-form">
+          <label>E-MAIL CORPORATIVO</label>
+          <input
+            type="email"
+            placeholder="ejemplo@trames.es"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+          <label>CONTRASEÑA</label>
+          <input
+            type="password"
+            placeholder="••••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-        <FifaButton onClick={login}>Entrar</FifaButton>
+          <button type="submit" className="login-button">
+            INICIAR SESIÓN →
+          </button>
+        </form>
       </div>
     </div>
   );

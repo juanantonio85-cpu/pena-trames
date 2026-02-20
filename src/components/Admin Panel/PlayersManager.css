@@ -1,0 +1,78 @@
+.players-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.players-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.players-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.players-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.players-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.player-card {
+  background: var(--dark);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #1f1f1f;
+  box-shadow: 0 0 15px #00ff7f20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-info h3 {
+  margin: 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.player-info p {
+  margin: 4px 0;
+  color: #ccc;
+}
+
+.player-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.admin-btn {
+  background: #ff4c4c;
+  box-shadow: 0 0 12px #ff4c4c80;
+}
+
+.player-btn {
+  background: #ffffff;
+  color: #000;
+  box-shadow: 0 0 12px #ffffff80;
+}

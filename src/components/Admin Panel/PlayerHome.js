@@ -50,11 +50,6 @@ export default function PlayerHome({ user, profile, onNavigate }) {
           </p>
         </div>
 
-        <div className="player-card" onClick={() => onNavigate("attendance")}>
-          <h2>Asistencia</h2>
-          <p>Confirma si vas al próximo partido.</p>
-        </div>
-
         <div className="player-card" onClick={() => onNavigate("ranking")}>
           <h2>Ranking</h2>
           <p>Revisa tu posición en la clasificación.</p>
@@ -74,3 +69,4 @@ export default function PlayerHome({ user, profile, onNavigate }) {
     </div>
   );
 }
+

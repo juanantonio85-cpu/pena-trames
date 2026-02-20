@@ -1,0 +1,69 @@
+/* ===== TRAMES FC 2026 — ADMIN PANEL ===== */
+
+.admin-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+/* Header */
+.admin-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.admin-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.admin-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.admin-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+/* Grid */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+/* Cards */
+.admin-card {
+  background: var(--dark);
+  padding: 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 15px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px var(--green-glow);
+  border-color: var(--green);
+}
+
+.admin-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.admin-card p {
+  color: #ccc;
+  font-size: 14px;
+}

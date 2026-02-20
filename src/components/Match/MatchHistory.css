@@ -1,0 +1,85 @@
+/* ===== TRAMES FC 2026 — MATCH HISTORY ===== */
+
+.history-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.history-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.history-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.history-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.history-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.history-card {
+  background: var(--dark);
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.history-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.history-card p {
+  color: #ccc;
+  margin: 6px 0;
+}
+
+.teams-box {
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.teams-box h3 {
+  margin: 0 0 8px 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-top: 40px;
+}
+
+.empty-team {
+  color: #777;
+  font-style: italic;
+}

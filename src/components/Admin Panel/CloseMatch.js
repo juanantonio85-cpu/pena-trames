@@ -1,80 +1,116 @@
 import React, { useEffect, useState } from "react";
+import "./CloseMatch.css";
 import { db } from "../../firebase";
-import {
-  collection,
-  getDocs,
-  doc,
-  updateDoc,
-  query,
-  where
-} from "firebase/firestore";
-import FifaCard from "../UI/FifaCard";
-import FifaButton from "../UI/FifaButton";
+import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
 
-export default function CloseMatch() {
-  const [match, setMatch] = useState(null);
+export default function CloseMatch({ onBack }) {
+  const [partidos, setPartidos] = useState([]);
+  const [selected, setSelected] = useState("");
+  const [golesRojo, setGolesRojo] = useState("");
+  const [golesBlanco, setGolesBlanco] = useState("");
 
   useEffect(() => {
-    const loadMatch = async () => {
-      const q = query(collection(db, "matches"), where("status", "==", "open"));
-      const snap = await getDocs(q);
-
-      if (!snap.empty) {
-        const docData = snap.docs[0];
-        setMatch({ id: docData.id, ...docData.data() });
-      }
+    const fetchPartidos = async () => {
+      const snap = await getDocs(collection(db, "partidos"));
+      const lista = [];
+      snap.forEach((d) => lista.push({ id: d.id, ...d.data() }));
+      setPartidos(lista.filter((p) => p.estado === "pendiente"));
     };
 
-    loadMatch();
+    fetchPartidos();
   }, []);
 
-  if (!match) return <p>No hay partido abierto</p>;
+  const cerrarPartido = async () => {
+    if (!selected) return alert("Selecciona un partido");
+    if (golesRojo === "" || golesBlanco === "") return alert("Introduce los goles");
 
-  const redGoals = match.goals?.filter((g) =>
-    match.redTeam.includes(g.playerName)
-  ).length || 0;
+    const partido = partidos.find((p) => p.id === selected);
+    if (!partido) return;
 
-  const whiteGoals = match.goals?.filter((g) =>
-    match.whiteTeam.includes(g.playerName)
-  ).length || 0;
+    const equipoRojo = partido.equipoRojo || [];
+    const equipoBlanco = partido.equipoBlanco || [];
 
-  const closeMatch = async () => {
-    const ref = doc(db, "matches", match.id);
+    // LÓGICA DE PUNTOS (TU LÓGICA ORIGINAL)
+    let puntosRojo = 0;
+    let puntosBlanco = 0;
 
-    await updateDoc(ref, {
-      status: "closed",
-      finalScore: {
-        red: redGoals,
-        white: whiteGoals
-      }
+    if (golesRojo > golesBlanco) {
+      puntosRojo = 3;
+      puntosBlanco = 1;
+    } else if (golesRojo < golesBlanco) {
+      puntosRojo = 1;
+      puntosBlanco = 3;
+    } else {
+      puntosRojo = 2;
+      puntosBlanco = 2;
+    }
+
+    // Actualizar puntos de jugadores
+    const usersSnap = await getDocs(collection(db, "users"));
+    const updates = [];
+
+    usersSnap.forEach((u) => {
+      const data = u.data();
+      let nuevosPuntos = data.puntos || 0;
+
+      if (equipoRojo.includes(data.name)) nuevosPuntos += puntosRojo;
+      if (equipoBlanco.includes(data.name)) nuevosPuntos += puntosBlanco;
+
+      updates.push(updateDoc(doc(db, "users", u.id), { puntos: nuevosPuntos }));
     });
 
-    alert("Partido cerrado correctamente");
-    setMatch(null);
+    await Promise.all(updates);
+
+    // Marcar partido como jugado
+    await updateDoc(doc(db, "partidos", selected), {
+      estado: "jugado",
+      golesRojo: Number(golesRojo),
+      golesBlanco: Number(golesBlanco)
+    });
+
+    alert("Partido cerrado y puntos actualizados");
+    onBack();
   };
 
   return (
-    <FifaCard>
-      <h3>Cerrar partido</h3>
+    <div className="close-container">
+      <button className="btn volver-btn" onClick={onBack}>⬅ Volver</button>
 
-      <p><strong>Fecha:</strong> {match.fecha}</p>
+      <header className="close-header">
+        <img src="/logo.png" alt="TRAMES FC" className="close-logo" />
+        <h1 className="close-title">CERRAR PARTIDO</h1>
+        <p className="close-subtitle">ACTUALIZAR RESULTADO Y PUNTOS</p>
+      </header>
 
-      <h4>Marcador</h4>
-      <p>🔴 Rojo: {redGoals}</p>
-      <p>⚪ Blanco: {whiteGoals}</p>
+      <div className="close-card">
+        <label>Seleccionar partido</label>
+        <select value={selected} onChange={(e) => setSelected(e.target.value)}>
+          <option value="">Selecciona uno...</option>
+          {partidos.map((p) => (
+            <option key={p.id} value={p.id}>
+              {p.fecha} — {p.hora} — {p.lugar}
+            </option>
+          ))}
+        </select>
 
-      <h4>Goleadores</h4>
-      {match.goals?.length > 0 ? (
-        match.goals.map((g, i) => (
-          <p key={i}>
-            {g.playerName} {g.minute ? `(${g.minute}')` : ""}
-          </p>
-        ))
-      ) : (
-        <p>No hay goles registrados</p>
-      )}
+        <label>Goles Equipo ROJO</label>
+        <input
+          type="number"
+          value={golesRojo}
+          onChange={(e) => setGolesRojo(e.target.value)}
+        />
 
-      <FifaButton onClick={closeMatch}>Cerrar partido</FifaButton>
-    </FifaCard>
+        <label>Goles Equipo BLANCO</label>
+        <input
+          type="number"
+          value={golesBlanco}
+          onChange={(e) => setGolesBlanco(e.target.value)}
+        />
+
+        <button className="btn cerrar-btn" onClick={cerrarPartido}>
+          Cerrar Partido →
+        </button>
+      </div>
+    </div>
   );
 }

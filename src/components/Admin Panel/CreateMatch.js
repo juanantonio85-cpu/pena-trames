@@ -1,103 +1,69 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import "./CreateMatch.css";
 import { db } from "../../firebase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import FifaCard from "../UI/FifaCard";
-import FifaButton from "../UI/FifaButton";
+import { collection, addDoc, Timestamp } from "firebase/firestore";
 
-export default function CreateMatch({ onMatchCreated }) {
-  const [players, setPlayers] = useState([]);
-  const [teams, setTeams] = useState({});
-  const [guests, setGuests] = useState([]);
-  const [guestName, setGuestName] = useState("");
-  const [date, setDate] = useState("");
+export default function CreateMatch({ onBack }) {
+  const [fecha, setFecha] = useState("");
+  const [hora, setHora] = useState("");
+  const [lugar, setLugar] = useState("");
 
-  // Cargar jugadores
-  useEffect(() => {
-    const loadPlayers = async () => {
-      const snap = await getDocs(collection(db, "users"));
-      const list = [];
-      snap.forEach((doc) => list.push({ id: doc.id, ...doc.data() }));
-      setPlayers(list);
-    };
-    loadPlayers();
-  }, []);
+  const crearPartido = async () => {
+    if (!fecha || !hora || !lugar) {
+      return alert("Rellena todos los campos");
+    }
 
-  const setTeam = (id, team) => {
-    setTeams((prev) => ({ ...prev, [id]: team }));
-  };
-
-  const addGuest = () => {
-    if (!guestName.trim()) return;
-    setGuests((prev) => [...prev, guestName.trim()]);
-    setGuestName("");
-  };
-
-  const createMatch = async () => {
-    const redTeam = players
-      .filter((p) => teams[p.id] === "red")
-      .map((p) => p.name);
-
-    const whiteTeam = players
-      .filter((p) => teams[p.id] === "white")
-      .map((p) => p.name);
-
-    const allPlayers = players.map((p) => p.name);
-
-    await addDoc(collection(db, "matches"), {
-      fecha: date,
-      redTeam,
-      whiteTeam,
-      guests,
-      status: "open",
-      attendance: {
-        yes: [],
-        no: [],
-        unknown: allPlayers
-      }
+    await addDoc(collection(db, "partidos"), {
+      fecha,
+      hora,
+      lugar,
+      estado: "pendiente",
+      equipoRojo: [],
+      equipoBlanco: [],
+      creado: Timestamp.now()
     });
 
-    if (onMatchCreated) onMatchCreated();
-
-    alert("Partido creado y equipos asignados");
+    alert("Partido creado correctamente");
+    onBack();
   };
 
   return (
-    <FifaCard>
-      <h3>Crear partido</h3>
+    <div className="create-container">
+      <button className="btn volver-btn" onClick={onBack}>⬅ Volver</button>
 
-      <label>Fecha</label>
-      <input value={date} onChange={(e) => setDate(e.target.value)} />
+      <header className="create-header">
+        <img src="/logo.png" alt="TRAMES FC" className="create-logo" />
+        <h1 className="create-title">CREAR PARTIDO</h1>
+        <p className="create-subtitle">CONFIGURAR NUEVO ENCUENTRO</p>
+      </header>
 
-      <h4>Asignar equipos</h4>
-      {players.map((p) => (
-        <div key={p.id} style={{ marginBottom: 8 }}>
-          <span>{p.name}</span>
-          <button onClick={() => setTeam(p.id, "red")}>Rojo</button>
-          <button onClick={() => setTeam(p.id, "white")}>Blanco</button>
-          <span>
-            {teams[p.id] === "red" && " 🔴"}
-            {teams[p.id] === "white" && " ⚪"}
-          </span>
-        </div>
-      ))}
+      <div className="create-card">
+        <label>Fecha</label>
+        <input
+          type="date"
+          value={fecha}
+          onChange={(e) => setFecha(e.target.value)}
+        />
 
-      <h4>Invitados</h4>
-      <input
-        placeholder="Nombre del invitado"
-        value={guestName}
-        onChange={(e) => setGuestName(e.target.value)}
-      />
-      <button onClick={addGuest}>Añadir invitado</button>
+        <label>Hora</label>
+        <input
+          type="time"
+          value={hora}
+          onChange={(e) => setHora(e.target.value)}
+        />
 
-      {guests.length > 0 && (
-        <ul>
-          {guests.map((g, i) => (
-            <li key={i}>{g}</li>
-          ))}
-        </ul>
-      )}
+        <label>Lugar</label>
+        <input
+          type="text"
+          placeholder="Campo Municipal..."
+          value={lugar}
+          onChange={(e) => setLugar(e.target.value)}
+        />
 
-      <FifaButton onClick={createMatch}>Guardar partido</FifaButton>
-    </FifaCard>
+        <button className="btn crear-btn" onClick={crearPartido}>
+          Crear Partido →
+        </button>
+      </div>
+    </div>
   );
 }

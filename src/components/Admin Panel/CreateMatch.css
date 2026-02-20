@@ -1,0 +1,66 @@
+.create-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.create-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.create-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.create-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.create-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.create-card {
+  background: var(--dark);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.create-card label {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.create-card input {
+  width: 100%;
+  background: var(--dark-soft);
+  border: 1px solid #333;
+  padding: 12px;
+  border-radius: 6px;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.crear-btn {
+  width: 100%;
+  margin-top: 10px;
+}

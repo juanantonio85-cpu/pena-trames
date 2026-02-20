@@ -1,0 +1,74 @@
+/* ===== TRAMES FC 2026 — PROFILE ===== */
+
+.profile-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.profile-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.profile-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.profile-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.profile-card {
+  background: var(--dark);
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  box-shadow: 0 0 20px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.profile-card label {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.profile-card input {
+  width: 100%;
+  background: var(--dark-soft);
+  border: 1px solid #333;
+  padding: 12px;
+  border-radius: 6px;
+  color: var(--white);
+  margin-bottom: 20px;
+  transition: 0.2s;
+}
+
+.profile-card input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 10px var(--green-glow);
+}
+
+.guardar-btn {
+  width: 100%;
+  margin-top: 10px;
+}

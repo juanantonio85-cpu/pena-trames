@@ -1,0 +1,175 @@
+/* ============================================================
+   TRAMES FC 2026 — GLOBAL STYLES
+   Modo oscuro + Glow verde + UI moderna
+   ============================================================ */
+
+/* ------------------------------
+   VARIABLES GLOBALES
+--------------------------------*/
+:root {
+  --black: #0a0a0a;
+  --dark: #111;
+  --dark-soft: #1a1a1a;
+
+  --white: #f5f5f5;
+
+  --green: #00ff7f;
+  --green-soft: #00cc66;
+  --green-glow: #00ff7f80;
+
+  --red: #ff4c4c;
+
+  --transition: 0.25s ease;
+}
+
+/* ------------------------------
+   RESET GENERAL
+--------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ------------------------------
+   SCROLLBAR PERSONALIZADO
+--------------------------------*/
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 4px;
+}
+
+/* ------------------------------
+   BOTONES GLOBALES
+--------------------------------*/
+.btn {
+  background: var(--green);
+  color: #000;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 0 12px var(--green-glow);
+}
+
+.btn:hover {
+  background: var(--green-soft);
+  box-shadow: 0 0 18px var(--green);
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Botón volver */
+.volver-btn {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  box-shadow: none;
+}
+
+.volver-btn:hover {
+  background: var(--green);
+  color: #000;
+}
+
+/* ------------------------------
+   INPUTS GLOBALES
+--------------------------------*/
+input, textarea, select {
+  font-size: 15px;
+  outline: none;
+}
+
+input:disabled {
+  opacity: 0.6;
+}
+
+/* ------------------------------
+   ANIMACIONES SUAVES
+--------------------------------*/
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------
+   TARJETAS GLOBALES
+--------------------------------*/
+.card {
+  background: var(--dark);
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #1f1f1f;
+  box-shadow: 0 0 15px #00ff7f20;
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: 0 0 25px var(--green-glow);
+  border-color: var(--green);
+}
+
+/* ------------------------------
+   TEXTO GLOW
+--------------------------------*/
+.glow {
+  color: var(--green);
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+/* ------------------------------
+   TITULARES GLOBALES
+--------------------------------*/
+h1, h2, h3 {
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.5;
+}
+
+/* ------------------------------
+   CONTENEDORES GLOBALES
+--------------------------------*/
+.page-container {
+  padding: 40px;
+  min-height: 100vh;
+}
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+@media (max-width: 600px) {
+  .page-container {
+    padding: 20px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}

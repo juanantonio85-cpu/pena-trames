@@ -1,69 +1,54 @@
-import React from "react";
-import FifaCard from "./UI/FifaCard";
-import FifaButton from "./UI/FifaButton";
-import { IconStar, IconBall, IconTrophy } from "./UI/IconsFifa";
+import React, { useState } from "react";
+import "./Profile.css";
+import { db } from "../firebase";
+import { doc, updateDoc } from "firebase/firestore";
 
 export default function Profile({ user, profile, onNavigate }) {
-  const totalMatches =
-    (profile.wins || 0) + (profile.draws || 0) + (profile.losses || 0);
+  const [name, setName] = useState(profile.name || "");
+  const [loading, setLoading] = useState(false);
+
+  const guardar = async () => {
+    if (!name.trim()) return alert("El nombre no puede estar vacío");
+
+    setLoading(true);
+
+    await updateDoc(doc(db, "users", user.uid), {
+      name
+    });
+
+    setLoading(false);
+    alert("Perfil actualizado");
+  };
 
   return (
-    <div>
-      {/* Botón volver */}
-      <div style={{ marginBottom: 20 }}>
-        <FifaButton onClick={() => onNavigate("home")}>⬅ Volver</FifaButton>
+    <div className="profile-container">
+      <button className="btn volver-btn" onClick={() => onNavigate("home")}>
+        ⬅ Volver
+      </button>
+
+      <header className="profile-header">
+        <img src="/logo.png" alt="TRAMES FC" className="profile-logo" />
+        <h1 className="profile-title">MI PERFIL</h1>
+        <p className="profile-subtitle">GESTIONA TU INFORMACIÓN PERSONAL</p>
+      </header>
+
+      <div className="profile-card">
+        <label>Nombre</label>
+        <input
+          type="text"
+          placeholder="Tu nombre..."
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+
+        <label>Email</label>
+        <input type="text" value={profile.email} disabled />
+
+        <button className="btn guardar-btn" onClick={guardar} disabled={loading}>
+          {loading ? "Guardando..." : "Guardar Cambios"}
+        </button>
       </div>
-
-      <h2 style={{ marginBottom: 20 }}>Perfil de {profile.name}</h2>
-
-      <FifaCard>
-        {/* Foto */}
-        <div style={{ textAlign: "center" }}>
-          <img
-            src={profile.photoURL || "/default-player.png"}
-            alt="Foto jugador"
-            style={{
-              width: 120,
-              height: 120,
-              borderRadius: "50%",
-              objectFit: "cover",
-              border: "3px solid #facc15",
-              marginBottom: 10
-            }}
-          />
-        </div>
-
-        {/* Datos básicos */}
-        <p><strong>Email:</strong> {user.email}</p>
-        <p><strong>Posición:</strong> {profile.position || "—"}</p>
-        <p><strong>Dorsal:</strong> #{profile.number || "—"}</p>
-
-        {/* Estadísticas */}
-        <div style={{ marginTop: 20 }}>
-          <p style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <IconBall /> Goles: <strong>{profile.goals || 0}</strong>
-          </p>
-
-          <p style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <IconStar /> Victorias: <strong>{profile.wins || 0}</strong>
-          </p>
-
-          <p style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <IconTrophy /> Partidos: <strong>{totalMatches}</strong>
-          </p>
-        </div>
-
-        {/* Navegación opcional */}
-        <div style={{ marginTop: 20, display: "flex", gap: 10 }}>
-          <FifaButton onClick={() => onNavigate("ranking")}>
-            Ver Ranking
-          </FifaButton>
-
-          <FifaButton onClick={() => onNavigate("history")}>
-            Historial de Partidos
-          </FifaButton>
-        </div>
-      </FifaCard>
     </div>
   );
 }
+

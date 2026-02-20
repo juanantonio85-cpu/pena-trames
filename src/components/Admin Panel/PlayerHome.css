@@ -1,0 +1,65 @@
+/* ===== TRAMES FC 2026 — PLAYER HOME ===== */
+
+.player-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.player-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.player-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.player-title {
+  font-size: 28px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.player-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.player-card {
+  background: var(--dark);
+  padding: 25px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+  box-shadow: 0 0 15px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.player-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px var(--green-glow);
+  border-color: var(--green);
+}
+
+.player-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.player-card p {
+  color: #ccc;
+  font-size: 14px;
+}

@@ -1,0 +1,92 @@
+/* ===== TRAMES FC 2026 — MATCH DETAILS ===== */
+
+.match-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.match-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.match-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.match-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.match-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.match-card {
+  background: var(--dark);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 20px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.match-card h2 {
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+  margin-bottom: 20px;
+}
+
+.match-info p {
+  margin: 8px 0;
+  color: #ccc;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.team-box {
+  background: var(--dark-soft);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #222;
+  box-shadow: 0 0 10px #00ff7f20;
+}
+
+.team-box h3 {
+  margin-top: 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.team-box p {
+  color: #ccc;
+  margin: 6px 0;
+}
+
+.empty {
+  color: #777;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 100px;
+  color: var(--green);
+  font-size: 18px;
+}

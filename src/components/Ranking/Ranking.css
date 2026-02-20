@@ -1,0 +1,95 @@
+/* ===== TRAMES FC 2026 — RANKING ===== */
+
+.ranking-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.ranking-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ranking-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.ranking-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.ranking-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ranking-card {
+  background: var(--dark);
+  padding: 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #1f1f1f;
+  box-shadow: 0 0 15px #00ff7f20;
+}
+
+.ranking-position {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+  width: 50px;
+  text-align: center;
+}
+
+.ranking-info h3 {
+  margin: 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.ranking-info p {
+  margin: 4px 0;
+  color: #ccc;
+}
+
+.ranking-badge span {
+  font-size: 28px;
+}
+
+.oro {
+  filter: drop-shadow(0 0 8px gold);
+}
+
+.plata {
+  filter: drop-shadow(0 0 8px silver);
+}
+
+.bronce {
+  filter: drop-shadow(0 0 8px #cd7f32);
+}
+
+.empty {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  margin-top: 40px;
+}

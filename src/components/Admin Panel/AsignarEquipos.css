@@ -1,0 +1,108 @@
+.asignar-container {
+  min-height: 100vh;
+  background: var(--black);
+  padding: 40px;
+  color: var(--white);
+}
+
+.volver-btn {
+  margin-bottom: 20px;
+}
+
+.asignar-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.asignar-logo {
+  width: 90px;
+  filter: drop-shadow(0 0 12px var(--green));
+  margin-bottom: 15px;
+}
+
+.asignar-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 12px var(--green-glow);
+}
+
+.asignar-subtitle {
+  color: var(--green);
+  letter-spacing: 2px;
+  font-size: 13px;
+}
+
+.jugadores-lista {
+  background: var(--dark);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 0 20px #00ff7f20;
+  border: 1px solid #1f1f1f;
+}
+
+.jugador-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #222;
+}
+
+.jugador-item:last-child {
+  border-bottom: none;
+}
+
+.acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.rojo-btn {
+  background: #ff4c4c;
+  box-shadow: 0 0 12px #ff4c4c80;
+}
+
+.blanco-btn {
+  background: #ffffff;
+  color: #000;
+  box-shadow: 0 0 12px #ffffff80;
+}
+
+.equipos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.equipo-card {
+  background: var(--dark);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #1f1f1f;
+  box-shadow: 0 0 15px #00ff7f20;
+}
+
+.equipo-card h3 {
+  margin-top: 0;
+  color: var(--green);
+  text-shadow: 0 0 8px var(--green-glow);
+}
+
+.rojo {
+  border-left: 4px solid #ff4c4c;
+}
+
+.blanco {
+  border-left: 4px solid #ffffff;
+}
+
+.empty {
+  color: #777;
+  font-style: italic;
+}
+
+.guardar-btn {
+  width: 100%;
+  margin-top: 10px;
+}

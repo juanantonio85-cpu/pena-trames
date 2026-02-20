@@ -1,119 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import {
-  doc,
-  getDoc,
-  updateDoc
-} from "firebase/firestore";
+import React from "react";
+import "./AdminPanel.css";
 
-export default function AsignarEquipos({ matchId, onBack }) {
-  const [match, setMatch] = useState(null);
-  const [apuntados, setApuntados] = useState([]);
-  const [rojo, setRojo] = useState([]);
-  const [blanco, setBlanco] = useState([]);
-
-  // Cargar datos del partido
-  useEffect(() => {
-    async function load() {
-      const ref = doc(db, "matches", matchId);
-      const snap = await getDoc(ref);
-
-      if (snap.exists()) {
-        const data = snap.data();
-        setMatch(data);
-
-        setApuntados(data.apuntados || []);
-        setRojo(data.equipoRojo || []);
-        setBlanco(data.equipoBlanco || []);
-      }
-    }
-
-    load();
-  }, [matchId]);
-
-  const moverArojo = (uid) => {
-    setRojo([...rojo, uid]);
-    setBlanco(blanco.filter((x) => x !== uid));
-  };
-
-  const moverAblanco = (uid) => {
-    setBlanco([...blanco, uid]);
-    setRojo(rojo.filter((x) => x !== uid));
-  };
-
-  const guardarEquipos = async () => {
-    try {
-      await updateDoc(doc(db, "matches", matchId), {
-        equipoRojo: rojo,
-        equipoBlanco: blanco
-      });
-
-      alert("Equipos guardados");
-      onBack();
-    } catch (e) {
-      console.error("Error guardando equipos:", e);
-    }
-  };
-
-  if (!match) return <p>Cargando...</p>;
-
+export default function AdminPanel({ onNavigate }) {
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Asignar equipos</h2>
-      <h3>{match.nombre}</h3>
+    <div className="admin-container">
 
-      <div style={{ display: "flex", gap: 20 }}>
-        {/* Jugadores apuntados */}
-        <div style={{ flex: 1 }}>
-          <h3>Apuntados</h3>
-          {apuntados.length === 0 && <p>No hay jugadores apuntados.</p>}
-          {apuntados.map((uid) => (
-            <div key={uid} style={{ marginBottom: 5 }}>
-              {uid}
-              <button onClick={() => moverArojo(uid)} style={{ marginLeft: 10 }}>
-                ➡ Rojo
-              </button>
-              <button onClick={() => moverAblanco(uid)} style={{ marginLeft: 10 }}>
-                ➡ Blanco
-              </button>
-            </div>
-          ))}
+      <header className="admin-header">
+        <img src="/logo.png" alt="TRAMES FC" className="admin-logo" />
+        <h1 className="admin-title">PANEL ADMINISTRATIVO</h1>
+        <p className="admin-subtitle">GESTIÓN INTERNA DEL CLUB</p>
+      </header>
+
+      <div className="admin-grid">
+
+        <div className="admin-card" onClick={() => onNavigate("crear")}>
+          <h2>Crear Partido</h2>
+          <p>Configura fecha, hora y lugar del próximo encuentro.</p>
         </div>
 
-        {/* Equipo ROJO */}
-        <div style={{ flex: 1 }}>
-          <h3 style={{ color: "red" }}>Equipo ROJO</h3>
-          {rojo.map((uid) => (
-            <div key={uid} style={{ marginBottom: 5 }}>
-              {uid}
-              <button onClick={() => moverAblanco(uid)} style={{ marginLeft: 10 }}>
-                ➡ Blanco
-              </button>
-            </div>
-          ))}
+        <div className="admin-card" onClick={() => onNavigate("asignar")}>
+          <h2>Asignar Equipos</h2>
+          <p>Organiza a los jugadores en equipos equilibrados.</p>
         </div>
 
-        {/* Equipo BLANCO */}
-        <div style={{ flex: 1 }}>
-          <h3 style={{ color: "gray" }}>Equipo BLANCO</h3>
-          {blanco.map((uid) => (
-            <div key={uid} style={{ marginBottom: 5 }}>
-              {uid}
-              <button onClick={() => moverArojo(uid)} style={{ marginLeft: 10 }}>
-                ➡ Rojo
-              </button>
-            </div>
-          ))}
+        <div className="admin-card" onClick={() => onNavigate("jugadores")}>
+          <h2>Gestión de Jugadores</h2>
+          <p>Consulta y administra la lista de jugadores.</p>
         </div>
+
+        <div className="admin-card" onClick={() => onNavigate("notificaciones")}>
+          <h2>Notificaciones</h2>
+          <p>Envía avisos y comunicados al equipo.</p>
+        </div>
+
+        {/* 🔥 NUEVA TARJETA: IMPORTAR DATOS */}
+        <div className="admin-card" onClick={() => onNavigate("importar")}>
+          <h2>Importar Datos</h2>
+          <p>Sube los CSV y reconstruye la base de datos.</p>
+        </div>
+
+        {/* 🔥 NUEVA TARJETA: MULTAS */}
+        <div className="admin-card" onClick={() => onNavigate("multas")}>
+          <h2>Multas</h2>
+          <p>Gestiona multas y retrasos de jugadores.</p>
+        </div>
+
+        <div className="admin-card" onClick={() => onNavigate("cerrar")}>
+          <h2>Cerrar Partido</h2>
+          <p>Introduce resultado y asigna puntos.</p>
+        </div>
+
       </div>
-
-      <button onClick={guardarEquipos} style={{ marginTop: 20 }}>
-        Guardar equipos
-      </button>
-
-      <button onClick={onBack} style={{ marginLeft: 10 }}>
-        Volver
-      </button>
     </div>
   );
 }
