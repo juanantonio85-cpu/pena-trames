@@ -1,6 +1,6 @@
 import React from "react";
 import "./LogoTrames.css";
-import logo from "../../logo.png";
+import logo from "/logo.png";
 
 export default function LogoTrames({ size = 140 }) {
   return (
