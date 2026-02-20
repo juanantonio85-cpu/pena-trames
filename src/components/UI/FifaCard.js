@@ -18,13 +18,13 @@ export default function FifaCard({ player }) {
         textTransform: "uppercase",
       }}
     >
-      {/* MEDIA (más baja) */}
+      {/* MEDIA (más baja y más pequeña) */}
       <div
         style={{
           position: "absolute",
-          top: 42,     // BAJADO
+          top: 48,       // antes 42 → bajada fina
           left: 26,
-          fontSize: 40,
+          fontSize: 34,  // antes 40 → más pequeña
           fontFamily: "'Anton', sans-serif",
           fontWeight: 900,
           color: "#2f2f2f",
@@ -33,13 +33,13 @@ export default function FifaCard({ player }) {
         {player.mediaGeneral || 50}
       </div>
 
-      {/* POSICIÓN (más baja) */}
+      {/* POSICIÓN (más baja y más pequeña) */}
       <div
         style={{
           position: "absolute",
-          top: 88,     // BAJADO
+          top: 88 + 10,  // antes 88 → bajada 10px
           left: 30,
-          fontSize: 18,
+          fontSize: 15,  // antes 18 → más pequeña
           fontWeight: 700,
         }}
       >
@@ -61,11 +61,11 @@ export default function FifaCard({ player }) {
         }}
       />
 
-      {/* NOMBRE (bajado un poco más) */}
+      {/* NOMBRE */}
       <div
         style={{
           position: "absolute",
-          top: 250,     // BAJADO
+          top: 250,
           width: "100%",
           textAlign: "center",
           fontSize: 20,
@@ -76,11 +76,11 @@ export default function FifaCard({ player }) {
         {player.name}
       </div>
 
-      {/* NOMBRES DE LAS MÉTRICAS (más estrechos) */}
+      {/* NOMBRES DE LAS MÉTRICAS */}
       <div
         style={{
           position: "absolute",
-          top: 278,     // BAJADO
+          top: 278,
           width: "100%",
           textAlign: "center",
           fontSize: 11,
@@ -91,11 +91,11 @@ export default function FifaCard({ player }) {
         PAC&nbsp;SHO&nbsp;PAS&nbsp;DRI&nbsp;DEF&nbsp;PHY
       </div>
 
-      {/* VALORES DE LAS MÉTRICAS (más compactos) */}
+      {/* VALORES DE LAS MÉTRICAS */}
       <div
         style={{
           position: "absolute",
-          top: 298,     // BAJADO
+          top: 298,
           width: "100%",
           textAlign: "center",
           fontSize: 13,
@@ -111,16 +111,16 @@ export default function FifaCard({ player }) {
         {player.phy || 50}
       </div>
 
-      {/* ESCUDO (más pequeño y más arriba) */}
+      {/* ESCUDO */}
       <img
         src="/logo.png"
         alt="TRAMES FC"
         style={{
           position: "absolute",
-          bottom: 32,    // SUBIDO
+          bottom: 32,
           left: "50%",
           transform: "translateX(-50%)",
-          width: 24,     // MÁS PEQUEÑO
+          width: 24,
           height: 24,
           objectFit: "contain",
         }}
