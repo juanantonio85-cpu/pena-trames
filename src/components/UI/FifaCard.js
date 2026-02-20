@@ -21,8 +21,8 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 22,
-          left: 22,
+          top: 45,
+          left: 28,
           fontSize: 40,
           fontWeight: "900",
         }}
@@ -34,8 +34,8 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 70,
-          left: 26,
+          top: 92,
+          left: 32,
           fontSize: 18,
           fontWeight: "700",
         }}
@@ -49,10 +49,10 @@ export default function FifaCard({ player }) {
         alt="TRAMES FC"
         style={{
           position: "absolute",
-          top: 25,
-          right: 25,
-          width: 38,
-          height: 38,
+          top: 50,
+          right: 28,
+          width: 40,
+          height: 40,
           objectFit: "contain",
         }}
       />
@@ -62,11 +62,11 @@ export default function FifaCard({ player }) {
         src={player.fotoURL || "/default-player.png"}
         alt="foto"
         style={{
-          width: 120,
-          height: 120,
+          width: 130,
+          height: 130,
           objectFit: "contain",
           position: "absolute",
-          top: 95,
+          top: 120,
           left: "50%",
           transform: "translateX(-50%)",
         }}
@@ -76,7 +76,7 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 225,
+          top: 260,
           width: "100%",
           textAlign: "center",
           fontSize: 20,
@@ -90,8 +90,8 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          bottom: 35,
-          left: 35,
+          bottom: 40,
+          left: 40,
           fontSize: 15,
           fontWeight: "700",
           lineHeight: "22px",
