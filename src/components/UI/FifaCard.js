@@ -13,19 +13,21 @@ export default function FifaCard({ player }) {
         backgroundSize: "cover",
         backgroundPosition: "center",
         color: "#3a3a3a",
-        fontFamily: "'Oswald', sans-serif",
+        fontFamily: "'Roboto Condensed', sans-serif",
         margin: "0 auto",
         textTransform: "uppercase",
       }}
     >
-      {/* MEDIA */}
+      {/* MEDIA (arriba izquierda) */}
       <div
         style={{
           position: "absolute",
           top: 28,
           left: 26,
-          fontSize: 38,
+          fontSize: 40,
+          fontFamily: "'Anton', sans-serif",
           fontWeight: 900,
+          color: "#2f2f2f",
         }}
       >
         {player.mediaGeneral || 50}
@@ -59,11 +61,11 @@ export default function FifaCard({ player }) {
         }}
       />
 
-      {/* NOMBRE */}
+      {/* NOMBRE (bajado 10px) */}
       <div
         style={{
           position: "absolute",
-          top: 235,
+          top: 245,
           width: "100%",
           textAlign: "center",
           fontSize: 20,
@@ -78,7 +80,7 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 270,
+          top: 275,
           width: "100%",
           textAlign: "center",
           fontSize: 12,
@@ -93,7 +95,7 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 292,
+          top: 297,
           width: "100%",
           textAlign: "center",
           fontSize: 14,
@@ -109,17 +111,17 @@ export default function FifaCard({ player }) {
         {player.phy || 50}
       </div>
 
-      {/* ESCUDO */}
+      {/* ESCUDO (reducido y centrado) */}
       <img
         src="/logo.png"
         alt="TRAMES FC"
         style={{
           position: "absolute",
-          bottom: 20,
+          bottom: 18,
           left: "50%",
           transform: "translateX(-50%)",
-          width: 42,
-          height: 42,
+          width: 32,
+          height: 32,
           objectFit: "contain",
         }}
       />
