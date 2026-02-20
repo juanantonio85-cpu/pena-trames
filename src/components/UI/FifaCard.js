@@ -12,7 +12,6 @@ export default function FifaCard({ player }) {
         backgroundImage: "url('/fifa-card-gold.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        padding: "20px 15px",
         color: "#000",
         fontFamily: "sans-serif",
         margin: "0 auto"
@@ -22,10 +21,10 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 25,
-          left: 25,
-          fontSize: 38,
-          fontWeight: "900"
+          top: 22,
+          left: 22,
+          fontSize: 40,
+          fontWeight: "900",
         }}
       >
         {player.mediaGeneral || 50}
@@ -36,15 +35,15 @@ export default function FifaCard({ player }) {
         style={{
           position: "absolute",
           top: 70,
-          left: 28,
-          fontSize: 16,
-          fontWeight: "700"
+          left: 26,
+          fontSize: 18,
+          fontWeight: "700",
         }}
       >
         {player.posicion || "N/A"}
       </div>
 
-      {/* Escudo TRAMES FC (único) */}
+      {/* Escudo TRAMES FC */}
       <img
         src="/logo.png"
         alt="TRAMES FC"
@@ -54,7 +53,7 @@ export default function FifaCard({ player }) {
           right: 25,
           width: 38,
           height: 38,
-          objectFit: "contain"
+          objectFit: "contain",
         }}
       />
 
@@ -63,14 +62,13 @@ export default function FifaCard({ player }) {
         src={player.fotoURL || "/default-player.png"}
         alt="foto"
         style={{
-          width: 110,
-          height: 110,
-          objectFit: "cover",
+          width: 120,
+          height: 120,
+          objectFit: "contain",
           position: "absolute",
-          top: 105,
+          top: 95,
           left: "50%",
           transform: "translateX(-50%)",
-          borderRadius: 12
         }}
       />
 
@@ -82,7 +80,7 @@ export default function FifaCard({ player }) {
           width: "100%",
           textAlign: "center",
           fontSize: 20,
-          fontWeight: "700"
+          fontWeight: "700",
         }}
       >
         {player.name}
@@ -92,11 +90,11 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          bottom: 25,
-          left: 30,
-          fontSize: 14,
+          bottom: 35,
+          left: 35,
+          fontSize: 15,
           fontWeight: "700",
-          lineHeight: "20px"
+          lineHeight: "22px",
         }}
       >
         <div>PAC {player.pac || 50}</div>
