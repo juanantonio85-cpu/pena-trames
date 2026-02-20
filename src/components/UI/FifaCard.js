@@ -18,11 +18,11 @@ export default function FifaCard({ player }) {
         textTransform: "uppercase",
       }}
     >
-      {/* MEDIA (arriba izquierda) */}
+      {/* MEDIA (más baja) */}
       <div
         style={{
           position: "absolute",
-          top: 28,
+          top: 42,     // BAJADO
           left: 26,
           fontSize: 40,
           fontFamily: "'Anton', sans-serif",
@@ -33,11 +33,11 @@ export default function FifaCard({ player }) {
         {player.mediaGeneral || 50}
       </div>
 
-      {/* POSICIÓN */}
+      {/* POSICIÓN (más baja) */}
       <div
         style={{
           position: "absolute",
-          top: 72,
+          top: 88,     // BAJADO
           left: 30,
           fontSize: 18,
           fontWeight: 700,
@@ -55,17 +55,17 @@ export default function FifaCard({ player }) {
           height: 130,
           objectFit: "contain",
           position: "absolute",
-          top: 95,
+          top: 105,
           left: "50%",
           transform: "translateX(-50%)",
         }}
       />
 
-      {/* NOMBRE (bajado 10px) */}
+      {/* NOMBRE (bajado un poco más) */}
       <div
         style={{
           position: "absolute",
-          top: 245,
+          top: 250,     // BAJADO
           width: "100%",
           textAlign: "center",
           fontSize: 20,
@@ -76,52 +76,52 @@ export default function FifaCard({ player }) {
         {player.name}
       </div>
 
-      {/* NOMBRES DE LAS MÉTRICAS */}
+      {/* NOMBRES DE LAS MÉTRICAS (más estrechos) */}
       <div
         style={{
           position: "absolute",
-          top: 275,
+          top: 278,     // BAJADO
           width: "100%",
           textAlign: "center",
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: 700,
+          letterSpacing: 1,
+        }}
+      >
+        PAC&nbsp;SHO&nbsp;PAS&nbsp;DRI&nbsp;DEF&nbsp;PHY
+      </div>
+
+      {/* VALORES DE LAS MÉTRICAS (más compactos) */}
+      <div
+        style={{
+          position: "absolute",
+          top: 298,     // BAJADO
+          width: "100%",
+          textAlign: "center",
+          fontSize: 13,
+          fontWeight: 900,
           letterSpacing: 2,
         }}
       >
-        PAC&nbsp;&nbsp;SHO&nbsp;&nbsp;PAS&nbsp;&nbsp;DRI&nbsp;&nbsp;DEF&nbsp;&nbsp;PHY
-      </div>
-
-      {/* VALORES DE LAS MÉTRICAS */}
-      <div
-        style={{
-          position: "absolute",
-          top: 297,
-          width: "100%",
-          textAlign: "center",
-          fontSize: 14,
-          fontWeight: 900,
-          letterSpacing: 3,
-        }}
-      >
-        {player.pac || 50}&nbsp;&nbsp;
-        {player.sho || 50}&nbsp;&nbsp;
-        {player.pas || 50}&nbsp;&nbsp;
-        {player.dri || 50}&nbsp;&nbsp;
-        {player.def || 50}&nbsp;&nbsp;
+        {player.pac || 50}&nbsp;
+        {player.sho || 50}&nbsp;
+        {player.pas || 50}&nbsp;
+        {player.dri || 50}&nbsp;
+        {player.def || 50}&nbsp;
         {player.phy || 50}
       </div>
 
-      {/* ESCUDO (reducido y centrado) */}
+      {/* ESCUDO (más pequeño y más arriba) */}
       <img
         src="/logo.png"
         alt="TRAMES FC"
         style={{
           position: "absolute",
-          bottom: 18,
+          bottom: 32,    // SUBIDO
           left: "50%",
           transform: "translateX(-50%)",
-          width: 32,
-          height: 32,
+          width: 24,     // MÁS PEQUEÑO
+          height: 24,
           objectFit: "contain",
         }}
       />
