@@ -22,7 +22,7 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 66,        // antes 58 → bajada fina
+          top: 72,        // antes 66 → bajada fina
           left: 26,
           fontSize: 30,
           fontFamily: "'Anton', sans-serif",
@@ -37,7 +37,7 @@ export default function FifaCard({ player }) {
       <div
         style={{
           position: "absolute",
-          top: 102,       // antes 92 → bajada fina
+          top: 110,       // antes 102 → bajada fina
           left: 30,
           fontSize: 14,
           fontWeight: 700,
