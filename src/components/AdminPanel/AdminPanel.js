@@ -1,12 +1,13 @@
 import React from "react";
 import "./AdminPanel.css";
+import LogoTrames from "../UI/LogoTrames";
 
 export default function AdminPanel({ onNavigate, onSwitch }) {
   return (
     <div className="admin-container">
 
       <header className="admin-header">
-        <img src="/logo.png" alt="TRAMES FC" className="admin-logo" />
+        <LogoTrames size={110} />
         <h1 className="admin-title">PANEL ADMINISTRATIVO</h1>
         <p className="admin-subtitle">GESTIÓN INTERNA DEL CLUB</p>
 
@@ -51,6 +52,12 @@ export default function AdminPanel({ onNavigate, onSwitch }) {
         <div className="admin-card" onClick={() => onNavigate("cerrar")}>
           <h2>Cerrar Partido</h2>
           <p>Introduce resultado y asigna puntos.</p>
+        </div>
+
+        {/* 🟩 NUEVA OPCIÓN: VALORAR JUGADORES */}
+        <div className="admin-card" onClick={() => onNavigate("valorar")}>
+          <h2>Valorar Jugadores</h2>
+          <p>Asigna puntuaciones FIFA tras cada partido.</p>
         </div>
 
       </div>

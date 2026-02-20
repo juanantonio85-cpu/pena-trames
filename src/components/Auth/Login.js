@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import LogoTrames from "../UI/LogoTrames";
 import "./Login.css";
 
 export default function Login({ onRegister }) {
@@ -16,9 +17,11 @@ export default function Login({ onRegister }) {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h1 className="login-title">Iniciar Sesión</h1>
+    <div className="login-page">
+      <div className="login-card">
+        <LogoTrames size={130} />
+
+        <h1 className="login-title">INICIAR SESIÓN</h1>
 
         <input
           className="login-input"

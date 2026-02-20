@@ -1,0 +1,16 @@
+.trames-logo-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.trames-logo {
+  filter: drop-shadow(0 0 12px #00ff88) drop-shadow(0 0 22px #00ff88);
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.trames-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 18px #00ff88) drop-shadow(0 0 30px #00ff88);
+}

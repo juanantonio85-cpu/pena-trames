@@ -1,0 +1,64 @@
+.player-wrapper {
+  min-height: 100vh;
+  padding: 24px;
+  background: radial-gradient(circle at top, #0b1f16 0%, #000 60%);
+  color: #fff;
+}
+
+.player-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.player-fifa-card {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.player-title {
+  font-size: 24px;
+  margin-top: 10px;
+  letter-spacing: 1px;
+  color: #00ff88;
+  text-shadow: 0 0 8px #00ff88;
+}
+
+.player-subtitle {
+  font-size: 14px;
+  color: #ccc;
+  margin-top: 4px;
+}
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.player-card {
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 14px;
+  padding: 18px;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.player-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 28px rgba(0, 255, 136, 0.35);
+}
+
+.player-card h2 {
+  margin-bottom: 8px;
+  font-size: 18px;
+  color: #00ff88;
+}
+
+.player-card p {
+  color: #ccc;
+  font-size: 14px;
+}

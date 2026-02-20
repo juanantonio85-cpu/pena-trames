@@ -1,60 +1,81 @@
-.login-container {
-  height: 100vh;
+.login-page {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+  background: radial-gradient(circle at top, #0b1f16 0%, #000 60%);
+  color: #fff;
   padding: 20px;
 }
 
-.login-box {
-  background: #000;
-  padding: 40px;
-  border-radius: 12px;
+.login-card {
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 18px;
+  padding: 36px 30px;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
-  text-align: center;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 35px rgba(0, 255, 136, 0.25);
+  backdrop-filter: blur(4px);
 }
 
 .login-title {
-  color: white;
-  font-size: 28px;
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 22px;
+  letter-spacing: 2px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #00ff88;
+  text-shadow: 0 0 8px #00ff88;
 }
 
 .login-input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: none;
-  background: #222;
-  color: white;
-  font-size: 16px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  border: 1px solid #1f1f1f;
+  background: #050505;
+  color: #fff;
+  font-size: 15px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
 }
 
 .login-button {
   width: 100%;
   padding: 12px;
-  background: #ffcc00;
-  border: none;
-  border-radius: 6px;
-  font-size: 18px;
-  font-weight: bold;
+  border-radius: 10px;
+  border: 1px solid #00ff88;
+  background: #00ff88;
+  color: #000;
+  font-weight: 700;
   cursor: pointer;
+  margin-top: 6px;
+  font-size: 15px;
+  transition: background 0.2s, transform 0.15s;
 }
 
 .login-button:hover {
-  background: #e6b800;
+  background: #00e67a;
+  transform: translateY(-2px);
 }
 
 .login-register {
-  margin-top: 15px;
+  margin-top: 18px;
+  text-align: center;
+  font-size: 14px;
   color: #ccc;
 }
 
 .login-register span {
-  color: #4da3ff;
+  color: #00ff88;
   cursor: pointer;
+  text-decoration: underline;
+  font-weight: 600;
 }

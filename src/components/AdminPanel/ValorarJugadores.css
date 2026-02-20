@@ -1,0 +1,92 @@
+.valorar-wrapper {
+  min-height: 100vh;
+  padding: 28px;
+  background: radial-gradient(circle at top, #0b1f16 0%, #000 60%);
+  color: #fff;
+}
+
+.valorar-back {
+  background: transparent;
+  border: none;
+  color: #00ff88;
+  cursor: pointer;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.valorar-title {
+  text-align: center;
+  font-size: 26px;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+  margin-bottom: 20px;
+}
+
+.valorar-card {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+  margin-bottom: 20px;
+}
+
+.valorar-card select {
+  width: 100%;
+  padding: 12px;
+  background: #050505;
+  border: 1px solid #1f1f1f;
+  border-radius: 8px;
+  color: #fff;
+}
+
+.valorar-lista {
+  margin-top: 20px;
+}
+
+.valorar-jugador {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+  margin-bottom: 20px;
+}
+
+.valorar-jugador h3 {
+  margin-bottom: 12px;
+  color: #00ff88;
+}
+
+.valorar-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 12px;
+}
+
+.valorar-stat label {
+  font-size: 13px;
+  color: #ccc;
+}
+
+.valorar-stat input {
+  width: 100%;
+  padding: 8px;
+  background: #050505;
+  border: 1px solid #1f1f1f;
+  border-radius: 6px;
+  color: #fff;
+}
+
+.valorar-save {
+  width: 100%;
+  padding: 14px;
+  background: #00ff88;
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 16px;
+}

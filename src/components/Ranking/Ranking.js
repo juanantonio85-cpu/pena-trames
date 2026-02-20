@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Ranking.css";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import FifaCard from "../UI/FifaCard";
+import LogoTrames from "../UI/LogoTrames";
 
 export default function Ranking({ onNavigate }) {
   const [jugadores, setJugadores] = useState([]);
@@ -12,15 +14,20 @@ export default function Ranking({ onNavigate }) {
       const lista = [];
 
       snap.forEach((d) => {
-        lista.push({
-          id: d.id,
-          ...d.data(),
-          puntos: d.data().puntos || 0
-        });
+        const data = d.data();
+
+        // Solo jugadores (no admins)
+        if (data.role !== "admin") {
+          lista.push({
+            id: d.id,
+            ...data,
+            mediaGeneral: data.mediaGeneral || 50
+          });
+        }
       });
 
-      // Ordenar por puntos descendente
-      lista.sort((a, b) => b.puntos - a.puntos);
+      // Ordenar por media general descendente
+      lista.sort((a, b) => b.mediaGeneral - a.mediaGeneral);
 
       setJugadores(lista);
     };
@@ -35,9 +42,9 @@ export default function Ranking({ onNavigate }) {
       </button>
 
       <header className="ranking-header">
-        <img src="/logo.png" alt="TRAMES FC" className="ranking-logo" />
-        <h1 className="ranking-title">RANKING GENERAL</h1>
-        <p className="ranking-subtitle">CLASIFICACIÓN DE JUGADORES</p>
+        <LogoTrames size={110} />
+        <h1 className="ranking-title">RANKING FIFA</h1>
+        <p className="ranking-subtitle">MEJORES JUGADORES DEL CLUB</p>
       </header>
 
       <div className="ranking-list">
@@ -47,20 +54,29 @@ export default function Ranking({ onNavigate }) {
 
         {jugadores.map((j, index) => (
           <div key={j.id} className="ranking-card">
-            <div className="ranking-position">
-              #{index + 1}
+
+            {/* POSICIÓN */}
+            <div className="ranking-position">#{index + 1}</div>
+
+            {/* MINI CARTA FIFA */}
+            <div className="ranking-mini-card">
+              <FifaCard player={j} />
             </div>
 
+            {/* INFO */}
             <div className="ranking-info">
-              <h3>{j.name || j.email}</h3>
-              <p>Puntos: {j.puntos}</p>
+              <h3>{j.name}</h3>
+              <p>Dorsal: {j.dorsal || "-"}</p>
+              <p>Media: {j.mediaGeneral}</p>
             </div>
 
+            {/* MEDALLAS */}
             <div className="ranking-badge">
               {index === 0 && <span className="oro">🥇</span>}
               {index === 1 && <span className="plata">🥈</span>}
               {index === 2 && <span className="bronce">🥉</span>}
             </div>
+
           </div>
         ))}
       </div>

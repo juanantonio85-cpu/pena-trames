@@ -1,0 +1,86 @@
+.pcard-wrapper {
+  min-height: 100vh;
+  padding: 28px;
+  background: radial-gradient(circle at top, #0b1f16 0%, #000 60%);
+  color: #fff;
+}
+
+.pcard-back {
+  background: transparent;
+  border: none;
+  color: #00ff88;
+  cursor: pointer;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.pcard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.pcard-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+.pcard-subtitle {
+  color: #ccc;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.pcard-card-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.pcard-section {
+  background: rgba(0, 0, 0, 0.85);
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
+}
+
+.pcard-section h2 {
+  margin-top: 0;
+  color: #00ff88;
+  text-shadow: 0 0 8px #00ff88;
+}
+
+.pcard-bio p {
+  margin: 6px 0;
+  color: #ccc;
+}
+
+.pcard-hist-item {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.pcard-hist-stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.pcard-hist-stats span {
+  background: #00ff8840;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.pcard-empty {
+  color: #777;
+  font-style: italic;
+}

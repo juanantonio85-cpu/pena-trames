@@ -2,7 +2,7 @@
 
 .ranking-container {
   min-height: 100vh;
-  background: var(--black);
+  background: radial-gradient(circle at top, #0b1f16 0%, #000 60%);
   padding: 40px;
   color: var(--white);
 }
@@ -14,12 +14,6 @@
 .ranking-header {
   text-align: center;
   margin-bottom: 40px;
-}
-
-.ranking-logo {
-  width: 90px;
-  filter: drop-shadow(0 0 12px var(--green));
-  margin-bottom: 15px;
 }
 
 .ranking-title {
@@ -37,18 +31,18 @@
 .ranking-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 }
 
 .ranking-card {
-  background: var(--dark);
+  background: rgba(0, 0, 0, 0.85);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   gap: 20px;
-  border: 1px solid #1f1f1f;
-  box-shadow: 0 0 15px #00ff7f20;
+  border: 1px solid rgba(0, 255, 136, 0.35);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.25);
 }
 
 .ranking-position {
@@ -58,6 +52,11 @@
   text-shadow: 0 0 8px var(--green-glow);
   width: 50px;
   text-align: center;
+}
+
+.ranking-mini-card {
+  transform: scale(0.7);
+  transform-origin: left center;
 }
 
 .ranking-info h3 {

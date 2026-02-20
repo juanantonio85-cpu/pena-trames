@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useEffect, useState } from "react";
 import { auth, db, requestNotificationPermission } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
@@ -17,6 +18,7 @@ import Notifications from "./components/AdminPanel/Notifications";
 import CloseMatch from "./components/AdminPanel/CloseMatch";
 import ImportData from "./components/AdminPanel/ImportData";
 import Multas from "./components/AdminPanel/Multas";
+import ValorarJugadores from "./components/AdminPanel/ValorarJugadores";
 
 // PLAYER
 import PlayerHome from "./components/Player/PlayerHome";
@@ -25,6 +27,7 @@ import MatchHistory from "./components/Match/MatchHistory";
 import Ranking from "./components/Ranking/Ranking";
 import Profile from "./components/Profile";
 import Attendance from "./components/Player/Attendance";
+import PlayerCardView from "./components/Player/PlayerCardView"; // 🟩 NUEVO
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -34,7 +37,7 @@ export default function App() {
   // Router interno del admin
   const [adminScreen, setAdminScreen] = useState("panel");
 
-  // 🔥 Nuevo: modo admin / modo jugador
+  // Modo admin / modo jugador
   const [adminMode, setAdminMode] = useState(true);
 
   // Router interno del jugador
@@ -91,7 +94,7 @@ export default function App() {
     );
   }
 
-  // 🔥 ADMIN: puede cambiar entre vista admin y vista jugador
+  // Vista ADMIN (conmutando admin / jugador)
   if (profile.role === "admin" && adminMode) {
     if (adminScreen === "panel") {
       return (
@@ -129,33 +132,34 @@ export default function App() {
     if (adminScreen === "multas") {
       return <Multas onBack={() => setAdminScreen("panel")} />;
     }
+
+    if (adminScreen === "valorar") {
+      return <ValorarJugadores onBack={() => setAdminScreen("panel")} />;
+    }
   }
 
-  // 🔥 Vista jugador (también accesible para admin)
+  // Router jugador
   const navigate = (name, data = null) => {
     setScreen({ name, data });
   };
 
   return (
-    <div style={{ padding: 20 }}>
-      {/* Botón para volver a modo admin */}
+    <div className="app-shell">
       {profile.role === "admin" && !adminMode && (
-        <button onClick={() => setAdminMode(true)}>Cambiar a vista admin</button>
+        <button
+          className="mode-switch-button"
+          onClick={() => setAdminMode(true)}
+        >
+          Cambiar a vista admin
+        </button>
       )}
 
       {screen.name === "home" && (
-        <PlayerHome
-          user={user}
-          profile={profile}
-          onNavigate={navigate}
-        />
+        <PlayerHome user={user} profile={profile} onNavigate={navigate} />
       )}
 
       {screen.name === "matchDetails" && (
-        <MatchDetails
-          matchId={screen.data}
-          onNavigate={navigate}
-        />
+        <MatchDetails matchId={screen.data} onNavigate={navigate} />
       )}
 
       {screen.name === "history" && (
@@ -167,22 +171,28 @@ export default function App() {
       )}
 
       {screen.name === "profile" && (
-        <Profile
-          user={user}
-          profile={profile}
-          onNavigate={navigate}
-        />
+        <Profile user={user} profile={profile} onNavigate={navigate} />
       )}
 
       {screen.name === "attendance" && (
-        <Attendance
-          user={user}
-          onNavigate={navigate}
+        <Attendance user={user} onNavigate={navigate} />
+      )}
+
+      {/* 🟩 NUEVA PANTALLA: FICHA INDIVIDUAL ESTILO FUT */}
+      {screen.name === "playerCard" && (
+        <PlayerCardView
+          player={screen.data}
+          onBack={() => navigate("home")}
         />
       )}
 
       {screen.name !== "home" && (
-        <button onClick={() => navigate("home")}>⬅ Volver</button>
+        <button
+          className="back-button-global"
+          onClick={() => navigate("home")}
+        >
+          ⬅ Volver
+        </button>
       )}
     </div>
   );

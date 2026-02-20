@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./MatchDetails.css";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import FifaCard from "../UI/FifaCard";
+import LogoTrames from "../UI/LogoTrames";
 
 export default function MatchDetails({ matchId, onNavigate }) {
   const [match, setMatch] = useState(null);
+  const [playersRojo, setPlayersRojo] = useState([]);
+  const [playersBlanco, setPlayersBlanco] = useState([]);
 
   useEffect(() => {
     const fetchMatch = async () => {
@@ -13,9 +17,26 @@ export default function MatchDetails({ matchId, onNavigate }) {
       const ref = doc(db, "partidos", matchId);
       const snap = await getDoc(ref);
 
-      if (snap.exists()) {
-        setMatch({ id: snap.id, ...snap.data() });
-      }
+      if (!snap.exists()) return;
+
+      const data = snap.data();
+      setMatch({ id: snap.id, ...data });
+
+      // Cargar jugadores completos
+      const loadPlayers = async (uids) => {
+        const arr = [];
+        for (let uid of uids || []) {
+          const userSnap = await getDoc(doc(db, "users", uid));
+          if (userSnap.exists()) arr.push({ id: uid, ...userSnap.data() });
+        }
+        return arr;
+      };
+
+      const rojo = await loadPlayers(data.equipoRojo || []);
+      const blanco = await loadPlayers(data.equipoBlanco || []);
+
+      setPlayersRojo(rojo);
+      setPlayersBlanco(blanco);
     };
 
     fetchMatch();
@@ -36,7 +57,7 @@ export default function MatchDetails({ matchId, onNavigate }) {
       </button>
 
       <header className="match-header">
-        <img src="/logo.png" alt="TRAMES FC" className="match-logo" />
+        <LogoTrames size={110} />
         <h1 className="match-title">PRÓXIMO PARTIDO</h1>
         <p className="match-subtitle">DETALLES DEL ENCUENTRO</p>
       </header>
@@ -56,26 +77,43 @@ export default function MatchDetails({ matchId, onNavigate }) {
         <h2>Equipos</h2>
 
         <div className="teams-grid">
+
+          {/* EQUIPO ROJO */}
           <div className="team-box rojo">
             <h3>Equipo ROJO</h3>
-            {match.equipoRojo?.length > 0 ? (
-              match.equipoRojo.map((j, i) => <p key={i}>{j}</p>)
+
+            {playersRojo.length > 0 ? (
+              <div className="team-players">
+                {playersRojo.map((p) => (
+                  <div key={p.id} className="team-player-card">
+                    <FifaCard player={p} />
+                  </div>
+                ))}
+              </div>
             ) : (
               <p className="empty">Sin asignar</p>
             )}
           </div>
 
+          {/* EQUIPO BLANCO */}
           <div className="team-box blanco">
             <h3>Equipo BLANCO</h3>
-            {match.equipoBlanco?.length > 0 ? (
-              match.equipoBlanco.map((j, i) => <p key={i}>{j}</p>)
+
+            {playersBlanco.length > 0 ? (
+              <div className="team-players">
+                {playersBlanco.map((p) => (
+                  <div key={p.id} className="team-player-card">
+                    <FifaCard player={p} />
+                  </div>
+                ))}
+              </div>
             ) : (
               <p className="empty">Sin asignar</p>
             )}
           </div>
+
         </div>
       </div>
     </div>
   );
 }
-

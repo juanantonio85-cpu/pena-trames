@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./PlayerHome.css";
 import { db } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import LogoTrames from "../UI/LogoTrames";
+import FifaCard from "../UI/FifaCard";
 
 export default function PlayerHome({ user, profile, onNavigate }) {
   const [proximoPartido, setProximoPartido] = useState(null);
@@ -24,13 +26,18 @@ export default function PlayerHome({ user, profile, onNavigate }) {
   }, []);
 
   return (
-    <div className="player-container">
+    <div className="player-wrapper">
 
       <header className="player-header">
-        <img src="/logo.png" alt="TRAMES FC" className="player-logo" />
+        <LogoTrames size={110} />
         <h1 className="player-title">BIENVENIDO, {profile.name}</h1>
         <p className="player-subtitle">TRAMES FC — PANEL DEL JUGADOR</p>
       </header>
+
+      {/* 🟩 MINI CARTA FIFA DEL JUGADOR */}
+      <div className="player-fifa-card">
+        <FifaCard player={profile} />
+      </div>
 
       <div className="player-grid">
 
