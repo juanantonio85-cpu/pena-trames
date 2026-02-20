@@ -27,21 +27,39 @@ import MatchHistory from "./components/Match/MatchHistory";
 import Ranking from "./components/Ranking/Ranking";
 import Profile from "./components/Profile";
 import Attendance from "./components/Player/Attendance";
-import PlayerCardView from "./components/Player/PlayerCardView"; // 🟩 NUEVO
+import PlayerCardView from "./components/Player/PlayerCardView";
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [authScreen, setAuthScreen] = useState("login");
 
-  // Router interno del admin
   const [adminScreen, setAdminScreen] = useState("panel");
-
-  // Modo admin / modo jugador
   const [adminMode, setAdminMode] = useState(true);
 
-  // Router interno del jugador
   const [screen, setScreen] = useState({ name: "home", data: null });
+
+  // 🔥 ESTILO PROFESIONAL PARA EL BOTÓN
+  const modeSwitchStyle = {
+    background: "linear-gradient(135deg, #00c853, #009624)",
+    color: "white",
+    padding: "10px 18px",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "15px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "0.2s ease-in-out",
+    margin: "15px auto",
+    display: "block"
+  };
+
+  const modeSwitchHover = {
+    background: "linear-gradient(135deg, #00e676, #00c853)",
+    transform: "translateY(-2px)"
+  };
+
+  const [hover, setHover] = useState(false);
 
   // Detectar login y cargar perfil
   useEffect(() => {
@@ -85,7 +103,6 @@ export default function App() {
     saveFcmToken();
   }, [user]);
 
-  // Si no está logueado → login/registro
   if (!user || !profile) {
     return authScreen === "login" ? (
       <Login onRegister={() => setAuthScreen("register")} />
@@ -94,7 +111,7 @@ export default function App() {
     );
   }
 
-  // Vista ADMIN (conmutando admin / jugador)
+  // Vista ADMIN
   if (profile.role === "admin" && adminMode) {
     if (adminScreen === "panel") {
       return (
@@ -138,7 +155,6 @@ export default function App() {
     }
   }
 
-  // Router jugador
   const navigate = (name, data = null) => {
     setScreen({ name, data });
   };
@@ -147,7 +163,9 @@ export default function App() {
     <div className="app-shell">
       {profile.role === "admin" && !adminMode && (
         <button
-          className="mode-switch-button"
+          style={hover ? { ...modeSwitchStyle, ...modeSwitchHover } : modeSwitchStyle}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
           onClick={() => setAdminMode(true)}
         >
           Cambiar a vista admin
@@ -178,7 +196,6 @@ export default function App() {
         <Attendance user={user} onNavigate={navigate} />
       )}
 
-      {/* 🟩 NUEVA PANTALLA: FICHA INDIVIDUAL ESTILO FUT */}
       {screen.name === "playerCard" && (
         <PlayerCardView
           player={screen.data}

@@ -1,11 +1,50 @@
 import React, { useState } from "react";
 import "./Profile.css";
-import { db, storage, auth } from "../firebase";
+import { db, auth } from "../firebase";
 import { doc, updateDoc } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { updatePassword } from "firebase/auth";
 import LogoTrames from "./UI/LogoTrames";
 import FifaCard from "./UI/FifaCard";
+
+// 🔥 Cloudinary uploader integrado aquí mismo
+async function uploadToCloudinary(file) {
+  const allowed = ["image/jpeg", "image/png", "image/webp"];
+  if (!allowed.includes(file.type)) {
+    throw new Error("Formato no válido. Usa JPG, PNG o WEBP.");
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  // ⬅️ Cambia esto por tu preset real
+  formData.append("upload_preset", "trames_preset");
+
+  // Eliminación de fondo + recorte de cara + redimensionado
+  formData.append(
+    "transformation",
+    JSON.stringify([
+      { effect: "background_removal" },
+      { crop: "thumb", gravity: "face", width: 400, height: 400 },
+      { fetch_format: "png" },
+      { quality: "auto" }
+    ])
+  );
+
+  const cloudName = "TU_CLOUD_NAME"; // ⬅️ cambia esto
+
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+    {
+      method: "POST",
+      body: formData
+    }
+  );
+
+  const data = await res.json();
+  if (!data.secure_url) throw new Error("Error subiendo imagen");
+
+  return data.secure_url;
+}
 
 export default function Profile({ user, profile, onNavigate }) {
   const [name, setName] = useState(profile.name || "");
@@ -34,18 +73,19 @@ export default function Profile({ user, profile, onNavigate }) {
     alert("Perfil actualizado");
   };
 
-  // Subir foto a Firebase Storage
+  // Subir foto a Cloudinary con eliminación de fondo
   const subirFoto = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
     setUploading(true);
 
-    const storageRef = ref(storage, `fotosPerfil/${user.uid}.jpg`);
-    await uploadBytes(storageRef, file);
-
-    const url = await getDownloadURL(storageRef);
-    setFotoURL(url);
+    try {
+      const url = await uploadToCloudinary(file);
+      setFotoURL(url);
+    } catch (err) {
+      alert(err.message);
+    }
 
     setUploading(false);
   };
@@ -104,7 +144,7 @@ export default function Profile({ user, profile, onNavigate }) {
         )}
 
         <input type="file" onChange={subirFoto} />
-        {uploading && <p className="profile-uploading">Subiendo foto...</p>}
+        {uploading && <p className="profile-uploading">Procesando foto...</p>}
 
         {/* NOMBRE */}
         <label>Nombre</label>
