@@ -9,14 +9,14 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 
 // ADMIN
-import AdminPanel from "./components/Admin Panel/AdminPanel";
-import AsignarEquipos from "./components/Admin Panel/AsignarEquipos";
-import CreateMatch from "./components/Admin Panel/CreateMatch";
-import PlayersManager from "./components/Admin Panel/PlayersManager";
-import Notifications from "./components/Admin Panel/Notifications";
-import CloseMatch from "./components/Admin Panel/CloseMatch";
-import ImportData from "./components/Admin Panel/ImportData"; 
-import Multas from "./components/Admin Panel/Multas";
+import AdminPanel from "./components/AdminPanel/AdminPanel";
+import AsignarEquipos from "./components/AdminPanel/AsignarEquipos";
+import CreateMatch from "./components/AdminPanel/CreateMatch";
+import PlayersManager from "./components/AdminPanel/PlayersManager";
+import Notifications from "./components/AdminPanel/Notifications";
+import CloseMatch from "./components/AdminPanel/CloseMatch";
+import ImportData from "./components/AdminPanel/ImportData";
+import Multas from "./components/AdminPanel/Multas";
 
 // PLAYER
 import PlayerHome from "./components/Player/PlayerHome";
@@ -34,10 +34,13 @@ export default function App() {
   // Router interno del admin
   const [adminScreen, setAdminScreen] = useState("panel");
 
+  // 🔥 Nuevo: modo admin / modo jugador
+  const [adminMode, setAdminMode] = useState(true);
+
   // Router interno del jugador
   const [screen, setScreen] = useState({ name: "home", data: null });
 
-  // 1) Detectar login y cargar perfil
+  // Detectar login y cargar perfil
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
       if (u) {
@@ -58,7 +61,7 @@ export default function App() {
     return () => unsub();
   }, []);
 
-  // 2) Guardar token FCM cuando el usuario inicia sesión
+  // Guardar token FCM
   useEffect(() => {
     async function saveFcmToken() {
       if (!user) return;
@@ -79,7 +82,7 @@ export default function App() {
     saveFcmToken();
   }, [user]);
 
-  // 3) Si no está logueado → login/registro
+  // Si no está logueado → login/registro
   if (!user || !profile) {
     return authScreen === "login" ? (
       <Login onRegister={() => setAuthScreen("register")} />
@@ -88,10 +91,15 @@ export default function App() {
     );
   }
 
-  // 4) Si es admin → router interno del admin
-  if (profile.role === "admin") {
+  // 🔥 ADMIN: puede cambiar entre vista admin y vista jugador
+  if (profile.role === "admin" && adminMode) {
     if (adminScreen === "panel") {
-      return <AdminPanel onNavigate={setAdminScreen} />;
+      return (
+        <AdminPanel
+          onNavigate={setAdminScreen}
+          onSwitch={() => setAdminMode(false)}
+        />
+      );
     }
 
     if (adminScreen === "asignar") {
@@ -113,27 +121,28 @@ export default function App() {
     if (adminScreen === "cerrar") {
       return <CloseMatch onBack={() => setAdminScreen("panel")} />;
     }
-    // 🔥 NUEVO: Importar Datos
-if (adminScreen === "importar") {
-  return <ImportData onBack={() => setAdminScreen("panel")} />;
-}
 
-// 🔥 NUEVO: Multas
-if (adminScreen === "multas") {
-  return <Multas onBack={() => setAdminScreen("panel")} />;
-}
+    if (adminScreen === "importar") {
+      return <ImportData onBack={() => setAdminScreen("panel")} />;
+    }
 
-
-    return <AdminPanel onNavigate={setAdminScreen} />;
+    if (adminScreen === "multas") {
+      return <Multas onBack={() => setAdminScreen("panel")} />;
+    }
   }
 
-  // 5) Router del jugador
+  // 🔥 Vista jugador (también accesible para admin)
   const navigate = (name, data = null) => {
     setScreen({ name, data });
   };
 
   return (
     <div style={{ padding: 20 }}>
+      {/* Botón para volver a modo admin */}
+      {profile.role === "admin" && !adminMode && (
+        <button onClick={() => setAdminMode(true)}>Cambiar a vista admin</button>
+      )}
+
       {screen.name === "home" && (
         <PlayerHome
           user={user}

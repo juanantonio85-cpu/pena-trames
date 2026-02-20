@@ -1,7 +1,7 @@
 import React from "react";
 import "./AdminPanel.css";
 
-export default function AdminPanel({ onNavigate }) {
+export default function AdminPanel({ onNavigate, onSwitch }) {
   return (
     <div className="admin-container">
 
@@ -9,6 +9,11 @@ export default function AdminPanel({ onNavigate }) {
         <img src="/logo.png" alt="TRAMES FC" className="admin-logo" />
         <h1 className="admin-title">PANEL ADMINISTRATIVO</h1>
         <p className="admin-subtitle">GESTIÓN INTERNA DEL CLUB</p>
+
+        {/* 🔥 Botón para cambiar a vista jugador */}
+        <button className="admin-switch" onClick={onSwitch}>
+          Cambiar a vista jugador
+        </button>
       </header>
 
       <div className="admin-grid">
@@ -33,13 +38,11 @@ export default function AdminPanel({ onNavigate }) {
           <p>Envía avisos y comunicados al equipo.</p>
         </div>
 
-        {/* 🔥 NUEVA TARJETA: IMPORTAR DATOS */}
         <div className="admin-card" onClick={() => onNavigate("importar")}>
           <h2>Importar Datos</h2>
           <p>Sube los CSV y reconstruye la base de datos.</p>
         </div>
 
-        {/* 🔥 NUEVA TARJETA: MULTAS */}
         <div className="admin-card" onClick={() => onNavigate("multas")}>
           <h2>Multas</h2>
           <p>Gestiona multas y retrasos de jugadores.</p>

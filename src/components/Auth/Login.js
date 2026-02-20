@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import AuthContainer from "./AuthContainer";
+import "./Login.css";
 
 export default function Login({ onRegister }) {
   const [email, setEmail] = useState("");
@@ -10,44 +10,41 @@ export default function Login({ onRegister }) {
   const login = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      alert("Error al iniciar sesión: " + err.message);
+    } catch (error) {
+      alert("Error al iniciar sesión: " + error.message);
     }
   };
 
   return (
-    <AuthContainer>
-      <h2>Iniciar Sesión</h2>
+    <div className="login-container">
+      <div className="login-box">
+        <h1 className="login-title">Iniciar Sesión</h1>
 
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "100%", marginBottom: 10 }}
-      />
+        <input
+          className="login-input"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "100%", marginBottom: 10 }}
-      />
+        <input
+          className="login-input"
+          type="password"
+          placeholder="Contraseña"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
-      <button onClick={login} style={{ width: "100%", marginBottom: 10 }}>
-        Entrar
-      </button>
+        <button className="login-button" onClick={login}>
+          Entrar
+        </button>
 
-      <p style={{ marginTop: 10 }}>
-        ¿No tienes cuenta?{" "}
-        <span
-          style={{ color: "#4ea1ff", cursor: "pointer" }}
-          onClick={onRegister}
-        >
-          Regístrate aquí
-        </span>
-      </p>
-    </AuthContainer>
+        <p className="login-register">
+          ¿No tienes cuenta?{" "}
+          <span onClick={onRegister}>Regístrate aquí</span>
+        </p>
+      </div>
+    </div>
   );
 }
