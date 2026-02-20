@@ -12,39 +12,39 @@ export default function FifaCard({ player }) {
         backgroundImage: "url('/fifa-card-gold.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        color: "#3b3b3b",
-        fontFamily: "'Oswald', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+        color: "#3a3a3a",
+        fontFamily: "'Oswald', sans-serif",
         margin: "0 auto",
         textTransform: "uppercase",
       }}
     >
-      {/* Media total (arriba izquierda) */}
+      {/* MEDIA */}
       <div
         style={{
           position: "absolute",
           top: 28,
           left: 26,
-          fontSize: 34,
+          fontSize: 38,
           fontWeight: 900,
         }}
       >
         {player.mediaGeneral || 50}
       </div>
 
-      {/* Posición (debajo de la media) */}
+      {/* POSICIÓN */}
       <div
         style={{
           position: "absolute",
-          top: 68,
+          top: 72,
           left: 30,
-          fontSize: 16,
+          fontSize: 18,
           fontWeight: 700,
         }}
       >
         {player.posicion || "ST"}
       </div>
 
-      {/* Foto jugador (centrada) */}
+      {/* FOTO */}
       <img
         src={player.fotoURL || "/default-player.png"}
         alt="foto"
@@ -53,20 +53,20 @@ export default function FifaCard({ player }) {
           height: 130,
           objectFit: "contain",
           position: "absolute",
-          top: 90,
+          top: 95,
           left: "50%",
           transform: "translateX(-50%)",
         }}
       />
 
-      {/* Nombre jugador (debajo de la foto) */}
+      {/* NOMBRE */}
       <div
         style={{
           position: "absolute",
-          top: 230,
+          top: 235,
           width: "100%",
           textAlign: "center",
-          fontSize: 18,
+          fontSize: 20,
           fontWeight: 700,
           letterSpacing: 1,
         }}
@@ -74,52 +74,52 @@ export default function FifaCard({ player }) {
         {player.name}
       </div>
 
-      {/* Nombres de las métricas (debajo del nombre) */}
+      {/* NOMBRES DE LAS MÉTRICAS */}
       <div
         style={{
           position: "absolute",
-          top: 260,
+          top: 270,
           width: "100%",
           textAlign: "center",
-          fontSize: 11,
-          fontWeight: 700,
-          letterSpacing: 1,
-        }}
-      >
-        PAC&nbsp;&nbsp;&nbsp;SHO&nbsp;&nbsp;&nbsp;PAS&nbsp;&nbsp;&nbsp;DRI&nbsp;&nbsp;&nbsp;DEF&nbsp;&nbsp;&nbsp;PHY
-      </div>
-
-      {/* Valores de las métricas (debajo de los nombres) */}
-      <div
-        style={{
-          position: "absolute",
-          top: 280,
-          width: "100%",
-          textAlign: "center",
-          fontSize: 13,
+          fontSize: 12,
           fontWeight: 700,
           letterSpacing: 2,
         }}
       >
-        {(player.pac || 50)}&nbsp;&nbsp;&nbsp;
-        {(player.sho || 50)}&nbsp;&nbsp;&nbsp;
-        {(player.pas || 50)}&nbsp;&nbsp;&nbsp;
-        {(player.dri || 50)}&nbsp;&nbsp;&nbsp;
-        {(player.def || 50)}&nbsp;&nbsp;&nbsp;
-        {(player.phy || 50)}
+        PAC&nbsp;&nbsp;SHO&nbsp;&nbsp;PAS&nbsp;&nbsp;DRI&nbsp;&nbsp;DEF&nbsp;&nbsp;PHY
       </div>
 
-      {/* Escudo TRAMES FC (abajo centrado) */}
+      {/* VALORES DE LAS MÉTRICAS */}
+      <div
+        style={{
+          position: "absolute",
+          top: 292,
+          width: "100%",
+          textAlign: "center",
+          fontSize: 14,
+          fontWeight: 900,
+          letterSpacing: 3,
+        }}
+      >
+        {player.pac || 50}&nbsp;&nbsp;
+        {player.sho || 50}&nbsp;&nbsp;
+        {player.pas || 50}&nbsp;&nbsp;
+        {player.dri || 50}&nbsp;&nbsp;
+        {player.def || 50}&nbsp;&nbsp;
+        {player.phy || 50}
+      </div>
+
+      {/* ESCUDO */}
       <img
         src="/logo.png"
         alt="TRAMES FC"
         style={{
           position: "absolute",
-          bottom: 18,
+          bottom: 20,
           left: "50%",
           transform: "translateX(-50%)",
-          width: 40,
-          height: 40,
+          width: 42,
+          height: 42,
           objectFit: "contain",
         }}
       />
