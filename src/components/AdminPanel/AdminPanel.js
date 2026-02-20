@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AdminPanel.css";
 import LogoTrames from "../UI/LogoTrames";
 
 export default function AdminPanel({ onNavigate, onSwitch }) {
+  // 🔥 ESTILO PROFESIONAL PARA EL BOTÓN
+  const switchStyle = {
+    background: "linear-gradient(135deg, #00c853, #009624)",
+    color: "white",
+    padding: "10px 18px",
+    border: "none",
+    borderRadius: "8px",
+    fontSize: "15px",
+    fontWeight: "600",
+    cursor: "pointer",
+    transition: "0.2s ease-in-out",
+    marginTop: "15px"
+  };
+
+  const switchHover = {
+    background: "linear-gradient(135deg, #00e676, #00c853)",
+    transform: "translateY(-2px)"
+  };
+
+  const [hover, setHover] = useState(false);
+
   return (
     <div className="admin-container">
 
@@ -12,7 +33,12 @@ export default function AdminPanel({ onNavigate, onSwitch }) {
         <p className="admin-subtitle">GESTIÓN INTERNA DEL CLUB</p>
 
         {/* 🔥 Botón para cambiar a vista jugador */}
-        <button className="admin-switch" onClick={onSwitch}>
+        <button
+          style={hover ? { ...switchStyle, ...switchHover } : switchStyle}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+          onClick={onSwitch}
+        >
           Cambiar a vista jugador
         </button>
       </header>
@@ -54,7 +80,6 @@ export default function AdminPanel({ onNavigate, onSwitch }) {
           <p>Introduce resultado y asigna puntos.</p>
         </div>
 
-        {/* 🟩 NUEVA OPCIÓN: VALORAR JUGADORES */}
         <div className="admin-card" onClick={() => onNavigate("valorar")}>
           <h2>Valorar Jugadores</h2>
           <p>Asigna puntuaciones FIFA tras cada partido.</p>
